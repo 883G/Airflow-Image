@@ -1,5 +1,6 @@
-ARG IMG_AIRFLOW_VERSION=2.10.2
+ARG IMG_AIRFLOW_VERSION=2.10.3
 ARG IMG_PYTHON_VERSION=3.8
+
 FROM apache/airflow:slim-${IMG_AIRFLOW_VERSION}-python${IMG_PYTHON_VERSION}
 
 SHELL ["/bin/bash", "-o", "pipefail", "-e", "-u", "-x", "-c"]
@@ -90,6 +91,6 @@ RUN apt-get update \
 USER ${AIRFLOW_UID}
 
 COPY requirements.txt /
-RUN pip install --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" --constraint "${HOME}/constraints.txt" -r /requirements.txt
+RUN pip install --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" -r /requirements.txt
 RUN pip install --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" \
     apache-airflow-providers-cncf-kubernetes==8.4.2
