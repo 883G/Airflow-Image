@@ -91,6 +91,4 @@ RUN apt-get update \
 USER ${AIRFLOW_UID}
 
 COPY requirements.txt /
-RUN pip install --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" -r /requirements.txt
-RUN pip install --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" \
-    apache-airflow-providers-cncf-kubernetes==8.4.2
+RUN pip install --no-cache-dir "apache-airflow[otel]==${AIRFLOW_VERSION}" -r /requirements.txt    
