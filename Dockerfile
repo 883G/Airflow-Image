@@ -80,6 +80,14 @@ RUN apt-get update \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
+# For using opencv-python we need to install libsm6
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+        libsm6 \
+  && apt-get autoremove -yqq --purge \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
 # For installtion of `sasl` it's requires the following package.
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
