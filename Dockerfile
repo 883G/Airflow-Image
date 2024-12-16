@@ -99,4 +99,5 @@ RUN apt-get update \
 USER ${AIRFLOW_UID}
 
 COPY requirements.txt /
-RUN pip install --no-cache-dir "apache-airflow[otel]==${AIRFLOW_VERSION}" -r /requirements.txt    
+COPY constraints-airflow-2.9.3.txt /
+RUN pip install --no-cache-dir "apache-airflow[otel]==${AIRFLOW_VERSION}" --constraint /constraints-airflow-2.9.3.txt -r /requirements.txt
