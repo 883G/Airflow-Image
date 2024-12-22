@@ -84,6 +84,7 @@ RUN apt-get update \
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
         libsm6 \
+        ffmpeg \
   && apt-get autoremove -yqq --purge \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
