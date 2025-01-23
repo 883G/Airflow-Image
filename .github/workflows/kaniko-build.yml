@@ -21,6 +21,7 @@ jobs:
           --context /workspace \
           --dockerfile /workspace/Dockerfile \
           --tar-path /workspace/build/image.tar
+          --no-push
 
       - name: Upload Docker Image Tarball
         uses: actions/upload-artifact@v3
