@@ -9,16 +9,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker config for Kaniko
+        run: |
+          mkdir -p /kaniko/.docker
+          echo '{"auths":{"your-artifactory-url":{"username":"${{ secrets.ARTIFACTORY_USER }}","password":"${{ secrets.ARTIFACTORY_PASSWORD }}"}}}' > /kaniko/.docker/config.json
+
       - name: Build Docker Image with Kaniko
-        uses: gcr.io/kaniko-project/executor:latest
-        with:
-          args: |
-            --context . \
-            --dockerfile Dockerfile \
-            --tar-path /build/image.tar
+        run: |
+          docker run \
+          -v $(pwd):/workspace \
+          -v /kaniko/.docker:/kaniko/.docker \
+          gcr.io/kaniko-project/executor:latest \
+          --context /workspace \
+          --dockerfile /workspace/Dockerfile \
+          --tar-path /workspace/build/image.tar
 
       - name: Upload Docker Image Tarball
         uses: actions/upload-artifact@v3
         with:
           name: docker-image-tar
-          path: /build/image.tar
+          path: build/image.tar
