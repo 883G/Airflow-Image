@@ -17,11 +17,10 @@ jobs:
           docker run \
           -v $(pwd):/workspace \
           -v /kaniko/.docker:/kaniko/.docker \
+          --entrypoint /bin/bash \
           gcr.io/kaniko-project/executor:latest \
-          --context /workspace \
-          --dockerfile /workspace/Dockerfile \
-          --tar-path /workspace/build/image.tar
-          --no-push
+          -c "kaniko --context /workspace --dockerfile /workspace/Dockerfile --tar-path /workspace/build/image.tar --no-push"
+
 
       - name: Upload Docker Image Tarball
         uses: actions/upload-artifact@v3
