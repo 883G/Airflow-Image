@@ -19,7 +19,7 @@ jobs:
           -v /kaniko/.docker:/kaniko/.docker \
           --entrypoint /kaniko/executor \
           gcr.io/kaniko-project/executor:latest \
-          -c "--context /workspace --dockerfile /workspace/Dockerfile --tar-path /workspace/build/image.tar --no-push"
+          -c " --no-push --context /workspace --dockerfile /workspace/Dockerfile --tar-path /workspace/build/image.tar"
 
 
       - name: Upload Docker Image Tarball
