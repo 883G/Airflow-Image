@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build Docker Image with Kaniko
-        uses: gcr.io/kaniko-project/executor:latest
+        uses: warrenbuckley/kaniko-action@v2
         with:
           args: |
             --no-push \
