@@ -3,7 +3,7 @@ name: Build Docker Image with Kaniko
 on:
   pull_request:
     branches:
-      - main
+      - feature/add-ci
 
 jobs:
   build:
