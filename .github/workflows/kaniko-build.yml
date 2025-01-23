@@ -12,11 +12,20 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Create build directory
+        run: |
+          mkdir -p build
+
       - name: Build Docker Image with Kaniko
-        uses: docker://gcr.io/kaniko-project/executor:latest
-        with:
-          args:
-            --no-push --context /workspace --dockerfile /workspace/Dockerfile --tar-path /workspace/build/image.tar
+        run: |
+          docker run \
+          -v $(pwd):/workspace \
+          -v /kaniko/.docker:/kaniko/.docker \
+          gcr.io/kaniko-project/executor:latest \
+          --no-push \
+          --context /workspace \
+          --dockerfile /workspace/Dockerfile \
+          --tar-path /workspace/build/image.tar
 
       - name: Upload Docker Image Tarball
         uses: actions/upload-artifact@v3
