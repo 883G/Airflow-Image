@@ -1,4 +1,4 @@
-ARG IMG_AIRFLOW_VERSION=2.10.3
+ARG IMG_AIRFLOW_VERSION=2.10.4
 ARG IMG_PYTHON_VERSION=3.8
 
 FROM apache/airflow:slim-${IMG_AIRFLOW_VERSION}-python${IMG_PYTHON_VERSION}
@@ -84,6 +84,7 @@ RUN apt-get update \
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
         libsm6 \
+        ffmpeg \
   && apt-get autoremove -yqq --purge \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
