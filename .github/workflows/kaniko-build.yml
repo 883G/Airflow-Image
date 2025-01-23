@@ -15,11 +15,8 @@ jobs:
       - name: Build Docker Image with Kaniko
         uses: docker://gcr.io/kaniko-project/executor:latest
         with:
-          args: |
-            --no-push \
-            --context /workspace \
-            --dockerfile /workspace/Dockerfile \
-            --tar-path /workspace/build/image.tar
+          args:
+            --no-push --context /workspace --dockerfile /workspace/Dockerfile --tar-path /workspace/build/image.tar
 
       - name: Upload Docker Image Tarball
         uses: actions/upload-artifact@v3
