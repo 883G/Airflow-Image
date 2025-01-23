@@ -1,9 +1,9 @@
 name: Build Docker Image with Kaniko
 
-#on:
-#  push:
-#    branches:
-#      - main
+on:
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
