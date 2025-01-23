@@ -17,9 +17,9 @@ jobs:
           docker run \
           -v $(pwd):/workspace \
           -v /kaniko/.docker:/kaniko/.docker \
-          --entrypoint /bin/bash \
+          --entrypoint /kaniko/executor \
           gcr.io/kaniko-project/executor:latest \
-          -c "kaniko --context /workspace --dockerfile /workspace/Dockerfile --tar-path /workspace/build/image.tar --no-push"
+          -c "--context /workspace --dockerfile /workspace/Dockerfile --tar-path /workspace/build/image.tar --no-push"
 
 
       - name: Upload Docker Image Tarball
