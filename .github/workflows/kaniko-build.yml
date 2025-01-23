@@ -18,7 +18,7 @@ jobs:
           -v $(pwd):/workspace \
           -v /kaniko/.docker:/kaniko/.docker \
           gcr.io/kaniko-project/executor:latest \
-          -no-push \
+          --no-push \
           --context /workspace \
           --dockerfile /workspace/Dockerfile \
           --tar-path /workspace/build/image.tar
