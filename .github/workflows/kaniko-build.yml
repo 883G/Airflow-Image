@@ -13,16 +13,13 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build Docker Image with Kaniko
-        run: |
-          docker run \
-          -v $(pwd):/workspace \
-          -v /kaniko/.docker:/kaniko/.docker \
-          gcr.io/kaniko-project/executor:latest \
-          --no-push \
-          --context /workspace \
-          --dockerfile /workspace/Dockerfile \
-          --tar-path /workspace/build/image.tar
-
+        uses: gcr.io/kaniko-project/executor:latest
+        with:
+          args: |
+            --no-push \
+            --context /workspace \
+            --dockerfile /workspace/Dockerfile \
+            --tar-path /workspace/build/image.tar
 
       - name: Upload Docker Image Tarball
         uses: actions/upload-artifact@v3
