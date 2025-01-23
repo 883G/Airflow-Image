@@ -1,0 +1,27 @@
+name: Build Docker Image with Kaniko
+
+#on:
+#  push:
+#    branches:
+#      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Build Docker Image with Kaniko
+        uses: gcr.io/kaniko-project/executor:latest
+        with:
+          args: |
+            --context . \
+            --dockerfile Dockerfile \
+            --tar-path /build/image.tar
+
+      - name: Upload Docker Image Tarball
+        uses: actions/upload-artifact@v3
+        with:
+          name: docker-image-tar
+          path: /build/image.tar
