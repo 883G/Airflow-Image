@@ -1,0 +1,37 @@
+name: Build Docker Image with Kaniko
+
+on:
+  pull_request:
+    branches:
+      - '**' # Trigger on all branches for pull requests
+  push:
+    branches:
+      - main   # Trigger on commits pushed to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Create build directory
+        run: |
+          mkdir -p build
+
+      - name: Build Docker Image with Kaniko
+        run: |
+          docker run \
+          -v $(pwd):/workspace \
+          -v /kaniko/.docker:/kaniko/.docker \
+          gcr.io/kaniko-project/executor:latest \
+          --no-push \
+          --context /workspace \
+          --dockerfile /workspace/Dockerfile \
+          --tar-path /workspace/build/image.tar
+
+      - name: Upload Docker Image Tarball
+        uses: actions/upload-artifact@v3
+        with:
+          name: docker-image-tar
+          path: build/image.tar
