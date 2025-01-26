@@ -1,9 +1,9 @@
 name: Build Docker Image with Kaniko
 
 on:
-  push:
-    tags:
-      - '*'
+  pull_request:
+    branches:
+      - '**' # Matches all branches
 
 jobs:
   build:
@@ -26,9 +26,3 @@ jobs:
           --context /workspace \
           --dockerfile /workspace/Dockerfile \
           --tar-path /workspace/build/image.tar
-
-      - name: Upload Docker Image Tarball
-        uses: actions/upload-artifact@v3
-        with:
-          name: docker-image-tar
-          path: build/image.tar
