@@ -1,9 +1,12 @@
 name: Build Docker Image with Kaniko
 
 on:
+  pull_request:
+    branches:
+      - '**' # Trigger on all branches for pull requests
   push:
-    tags:
-      - '*'
+    branches:
+      - main   # Trigger on commits pushed to the main branch
 
 jobs:
   build:
