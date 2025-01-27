@@ -7,7 +7,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-e", "-u", "-x", "-c"]
 
 USER 0
 
-RUN curl -o /usr/include/python3.12/longintrepr.h "https://raw.githubusercontent.com/python/cpython/refs/heads/main/Include/cpython/longintrepr.h"
+RUN curl -o /usr/include/python3.12/ "https://raw.githubusercontent.com/python/cpython/refs/heads/main/Include/cpython/longintrepr.h"
 
 
 # Install Java
