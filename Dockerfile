@@ -7,6 +7,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-e", "-u", "-x", "-c"]
 
 USER 0
 
+RUN curl -o /usr/include/python3.12/longintrepr.h "https://raw.githubusercontent.com/python/cpython/refs/heads/main/Include/cpython/longintrepr.h"
+
+
 # Install Java
 RUN apt install ca-certificates curl gnupg \
     && install -m 0755 -d /etc/apt/keyrings \
@@ -103,4 +106,3 @@ USER ${AIRFLOW_UID}
 
 COPY requirements.txt /
 RUN pip install --no-cache-dir "apache-airflow[otel]==${AIRFLOW_VERSION}" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-3.12.txt" -r /requirements.txt
-RUN pip3 install --user --upgrade Cython==0.29.33 sasl --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-3.12.txt"
