@@ -103,3 +103,4 @@ USER ${AIRFLOW_UID}
 
 COPY requirements.txt /
 RUN pip install --no-cache-dir "apache-airflow[otel]==${AIRFLOW_VERSION}" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-3.12.txt" -r /requirements.txt
+RUN pip install Cython==0.29.33 sasl --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-3.12.txt"

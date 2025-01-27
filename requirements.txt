@@ -32,7 +32,7 @@ apache-airflow-providers-trino
 
 ldap3
 python-ldap
-sasl
+# sasl
 virtualenv
 statsd
 pydantic
