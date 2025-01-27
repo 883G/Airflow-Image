@@ -100,7 +100,6 @@ RUN apt-get update \
 USER ${AIRFLOW_UID}
 
 # Extract the major and minor version
-ENV MAJOR_MINOR_VERSION=${PYTHON_VERSION%%.*}.${PYTHON_VERSION#*.}
 
 COPY requirements.txt /
-RUN pip install --no-cache-dir "apache-airflow[otel]==${AIRFLOW_VERSION}" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${MAJOR_MINOR_VERSION}.txt" -r /requirements.txt
+RUN pip install --no-cache-dir "apache-airflow[otel]==${AIRFLOW_VERSION}" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-3.12.txt" -r /requirements.txt
