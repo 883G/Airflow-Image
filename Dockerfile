@@ -1,5 +1,5 @@
 ARG IMG_AIRFLOW_VERSION=2.10.4
-ARG IMG_PYTHON_VERSION=3.8
+ARG IMG_PYTHON_VERSION=3.10
 
 FROM apache/airflow:slim-${IMG_AIRFLOW_VERSION}-python${IMG_PYTHON_VERSION}
 
@@ -99,6 +99,7 @@ RUN apt-get update \
 
 USER ${AIRFLOW_UID}
 
+# Extract the major and minor version
+
 COPY requirements.txt /
-COPY constraints-airflow-2.9.3.txt /
-RUN pip install --no-cache-dir "apache-airflow[otel]==${AIRFLOW_VERSION}" --constraint /constraints-airflow-2.9.3.txt -r /requirements.txt
+RUN pip install --no-cache-dir "apache-airflow[otel]==${AIRFLOW_VERSION}" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-3.10.txt" -r /requirements.txt
