@@ -7,7 +7,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-e", "-u", "-x", "-c"]
 
 USER 0
 
-COPY longintrepr.h /usr/include/python3.12/
+COPY longintrepr.h /usr/local/include/python3.12/
 
 
 # Install Java
