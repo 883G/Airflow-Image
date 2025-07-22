@@ -102,4 +102,5 @@ USER ${AIRFLOW_UID}
 # Extract the major and minor version
 
 COPY requirements.txt /
-RUN pip install --no-cache-dir "apache-airflow[otel]==${AIRFLOW_VERSION}" --constraint "home/airflow/constraints" -r /requirements.txt
+RUN pip install --no-cache-dir "apache-airflow[otel]==${IMG_AIRFLOW_VERSION}"  --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${IMG_AIRFLOW_VERSION}/constraints-${IMG_PYTHON_VERSION}.txt"
+ -r /requirements.txt
