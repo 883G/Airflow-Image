@@ -35,4 +35,3 @@ python-ldap
 virtualenv
 statsd
 pydantic
-kerberos>=1.3.0
