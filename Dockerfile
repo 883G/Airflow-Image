@@ -90,9 +90,11 @@ RUN apt-get update \
 
 USER ${AIRFLOW_UID}
 
-# Extract the major and minor version
-
 COPY requirements.txt /
-RUN pip install --no-cache-dir "apache-airflow[otel]==${AIRFLOW_VERSION}" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-3.12.txt" -r /requirements.txt
-RUN pip install --upgrade --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" "apache-airflow-providers-apache-hive[GSSAPI]==9.2.3" 
-RUN pip install --upgrade --no-cache-dir "apache-airflow[polars]==${AIRFLOW_VERSION}"
+RUN pip install --no-cache-dir "apache-airflow[otel,polars]==${AIRFLOW_VERSION}" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-3.12.txt" -r /requirements.txt
+
+# Added to override the constraints for some packages.
+
+RUN pip install --upgrade --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" "apache-airflow-providers-common-compat==1.12.0"
+RUN pip install --upgrade --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" "apache-airflow-providers-cncf-kubernetes==10.8.0"
+RUN pip install --upgrade --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" "apache-airflow-providers-apache-hive[GSSAPI]==9.1.4" 
